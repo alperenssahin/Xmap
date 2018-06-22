@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Xmap</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="Xmap.js"></script>
+</head>
+<body>
+<div style="display: block;">
+    <img src="map.jpg" style="display: none;" id="ex-image">
+    <div style="display: flex;">
+        <div class="Xmap" id="container">
+            <canvas id="Map" class="Xmap"></canvas>
+        </div>
+    </div>
+    <div class="Xmap" id="debug"></div>
+    <input id='Zoom' type="range" class="Xmap" data-role="none" min="1" max="2" step="0.01" value="0"
+           style="width: 500px;"></div>
+</div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var obj = [{
+            "title": "a",
+            x: 600,
+            y: 300,
+            r: 34,
+            items: {
+                count: 9,
+                id: [45, 67, 86, 1, 2, 3, 4, 5, 6]
+            }
+            ,
+            color: "red"
+
+        }, {
+            "title": "a",
+            x: 350,
+            y: 300,
+            r: 40,
+            items: {
+                count: 6,
+                id: [1, 2, 3, 44, 5, 6]
+            },
+            color: "#add"
+        }, {
+            "title": "a",
+            x: 425,
+            y: 400,
+            r: 20,
+            items: {
+                count: 2,
+                id: [1, 2]
+            },
+            color: "#ff00e7"
+        }];
+        setupXmap(500, 300, function () {
+            //css declaration..
+            $('body').css('overscroll-behavior-y','contain');
+            init('ex-image', obj, function () {
+                fulldrawMap();
+                if (config.mobile) {
+                    rePositionMobile();
+                } else {
+                    rePosition();
+                    ZoomMap();
+                }
+                config.clickCallback = function (a) {
+                    $('#debug.Xmap').text(a.titre);
+                }
+            });
+        });
+    });
+
+
+</script>
+</body>
+</html>
